@@ -21,7 +21,7 @@
     "php": "~7.0",
     "ext-pdo": "~5.0|~7.0",
     "ext-mysqli": "~5.0|~7.0",
-    "ext-gd": "^2.1"
+    "ext-gd": "~2.1|~7.0"
   },
   "autoload": {
     "files": [
