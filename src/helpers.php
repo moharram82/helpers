@@ -13,15 +13,21 @@ if (!function_exists('getMySQLEnumValues')) {
     {
         $enumType = '';
 
-        if($connection instanceof PDO) {
-            $enumType = $connection->query("SHOW COLUMNS FROM {$table} LIKE '{$enumCol}'")->fetchColumn(1);
-        } elseif($connection instanceof Illuminate\Database\MySqlConnection) {
-            $enumType = $connection->getPdo()->query("SHOW COLUMNS FROM {$table} LIKE '{$enumCol}'")->fetchColumn(1);
+        $sql = "SHOW COLUMNS FROM {$table} LIKE '{$enumCol}'";
+
+        if($connection instanceof PDO || $connection instanceof Illuminate\Database\MySqlConnection) {
+            if ($connection instanceof Illuminate\Database\MySqlConnection) {
+                $connection = $connection->getPdo();
+            }
+
+            $enumType = $connection->query($sql)->fetchColumn(1);
         } elseif ($connection instanceof mysqli) {
-            $enumType = $connection->query("SHOW COLUMNS FROM {$table} LIKE '{$enumCol}'")->fetch_assoc()['Type'];
+            $enumType = $connection->query($sql)->fetch_assoc()['Type'];
+        } else {
+            throw new InvalidArgumentException("The connection instance you provided is not supported.");
         }
 
-        if(false === $enumType) {
+        if(! $enumType) {
             throw new InvalidArgumentException("Column '{$enumCol}' does not exist in '{$table}' table.");
         }
 
