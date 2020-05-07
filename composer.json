@@ -1,19 +1,15 @@
 {
   "name": "moharram82/helpers",
-  "type": "project",
   "description": "A collection of useful PHP functions for different purposes.",
-  "minimum-stability": "stable",
-  "prefer-stable" : true,
-  "keywords": [
-    "php",
-    "helpers"
-  ],
+  "type": "library",
+  "keywords": ["php", "helpers"],
+  "homepage": "https://github.com/moharram82/helpers",
   "license": "MIT",
   "authors": [
     {
       "name": "Mohammed Moharram",
       "email": "moharram82@hotmail.com",
-      "homepage": "http://www.ijob.sd/moharram82",
+      "homepage": "https://moharram82.github.io/",
       "role": "Developer"
     }
   ],
@@ -25,7 +21,9 @@
   },
   "autoload": {
     "files": [
-      "src/Helpers/Helpers.php"
+      "src/helpers.php"
     ]
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable" : true
 }

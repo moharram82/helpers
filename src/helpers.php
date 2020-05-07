@@ -18,7 +18,7 @@ if (!function_exists('getMySQLEnumValues')) {
         } elseif($connection instanceof Illuminate\Database\MySqlConnection) {
             $enumType = $connection->getPdo()->query("SHOW COLUMNS FROM {$table} LIKE '{$enumCol}'")->fetchColumn(1);
         } elseif ($connection instanceof mysqli) {
-            $enumType = $connection->query("SHOW COLUMNS FROM users LIKE 'gender'")->fetch_assoc()['Type'];
+            $enumType = $connection->query("SHOW COLUMNS FROM {$table} LIKE '{$enumCol}'")->fetch_assoc()['Type'];
         }
 
         if(false === $enumType) {
@@ -38,7 +38,7 @@ if (!function_exists('getMySQLEnumValues')) {
 
 if (!function_exists('validUsername')) {
     /**
-     * checks if the supplied string is a valid username that:
+     * Checks if the supplied string is a valid username that:
      * - is in English only characters
      * - contains no spaces
      * - starts with letters only
@@ -60,7 +60,7 @@ if (!function_exists('validUsername')) {
 
 if (!function_exists('isPasswordStrong')) {
     /**
-     * checks if the supplied password is strong, which must be:
+     * Checks if the supplied password is strong, which must be:
      * - contain at least 1 uppercase letter
      * - contain at least 1 lowercase letter
      * - contain at least 1 number
@@ -81,7 +81,7 @@ if (!function_exists('isPasswordStrong')) {
 
 if (!function_exists('isEnglish')) {
     /**
-     * checks if the supplied string is:
+     * Checks if the supplied string is:
      * - English letters only
      * - may contain spaces in between words but not at the end
      *
@@ -287,7 +287,7 @@ if (!function_exists('validUrl')) {
 
 if (!function_exists('calculateAge')) {
     /**
-     * Calculates the age from a given birth date and returns the age or false if the supplied birth date is invalid date.
+     * Calculates the age for a given birth date and returns the age in years, months, days, decimal.
      *
      * @param string $birthdate in (yyyy-mm-dd) format
      * @param string $unit ("years", "months", "days" or "decimal").
